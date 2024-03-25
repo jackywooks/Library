@@ -1,0 +1,15 @@
+html {
+  height: 100%;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  /* margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr;
+  /* grid-template-rows: 22vh auto auto; */
+  /* grid-template-areas:
+    "sidebar header header"
+    "sidebar main main";
+  background-image: url(../images/dan-parker-u9m_vp7ZhUY-unsplash.jpg); */
+}
