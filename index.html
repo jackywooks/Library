@@ -26,9 +26,34 @@
         <div class="headerRowItem">
             <h1>Library</h1>
         </div>
-        <div class="headerRowItem button"><button id="addBook">Add</button></div>
+        <div class="headerRowItem button"><button id="addBook">Add Book</button></div>
     </header>
     <main>
+        <dialog id="dialog">
+            <form method="dialog">
+                <ul>
+                    <li>
+                        <label>Title:</label>
+                        <input type="text" required />
+                    </li>
+                    <li>
+                        <label>Author:</label>
+                        <input type="text" />
+                    </li>
+                    <li>
+                        <label>Pages:</label>
+                        <input type="number" />
+                    </li>
+                    <li>
+                        <label>Remark:</label>
+                        <input type="text" />
+                    </li>
+                </ul>
+                <div>
+                    <input type="submit" id="submit" value="Submit" />
+                </div>
+            </form>
+        </dialog>
     </main>
     <footer>
         <div class="footer">
