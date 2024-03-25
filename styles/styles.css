@@ -4,12 +4,81 @@ html {
 }
 
 body {
-  /* margin: 0;
+  margin: 0;
+  background-image: 
+    linear-gradient( rgba(0,0,0,0.75), rgba(0,0,0,0.75) ),
+    url(../images/bg.jpg);
+  background-size: cover;
+  color:white;
+  
+}
+
+
+/* Header */
+header {
+  display: flex;
+  align-content: space-between;
+
+  h1{
+    font-size: 3rem;
+  }
+
+  .headerRowItem {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  button {
+    background-color: #b8451b;
+    color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    border: none;
+    width: 12rem;
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+  }
+}
+
+/* Main */
+main {
   display: grid;
-  grid-template-columns: 1fr 2fr 2fr;
-  /* grid-template-rows: 22vh auto auto; */
-  /* grid-template-areas:
-    "sidebar header header"
-    "sidebar main main";
-  background-image: url(../images/dan-parker-u9m_vp7ZhUY-unsplash.jpg); */
+  gap: 1rem;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 5rem;
+
+  .bookCard {
+    margin: 1rem;
+    font-size: 0.8rem;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 1vw;
+    height: 30vh;
+    border: 1px solid black;
+
+    p.title {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    .shortcut {
+      display: flex;
+      flex-direction: row-reverse;
+
+      svg {
+        width: 20px;
+        margin: 0.5rem;
+        text-align: right;
+      }
+    }
+  }
+}
+
+
+/* Footer */
+.footer{
+  position: fixed;
+  bottom: 0.5rem;
+  left: 45%;
 }
