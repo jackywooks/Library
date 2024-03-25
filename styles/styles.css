@@ -71,7 +71,7 @@ main {
       color: black;
     }
 
-    button.close:hover{
+    button.close:hover {
       color: darkgrey;
     }
 
@@ -136,34 +136,25 @@ dialog {
       margin-bottom: 5px;
       border-radius: 5px;
     }
-
-    #readStatus {
-      padding: 10px 20px;
-      background-color: #f0f0f0;
-      border: 1px solid #ccc;
-      cursor: pointer;
-    }
-
-    #readStatus > span::before{
-      content: "Unread";
-    }
-    
-    #readStatus.active {
-      background-color: green;
-      color: white;
-    }
-
-    #readStatus.active > span::before{
-      content: "Read";
-    }
-    
-    /* Adding transitions for a smoother visual effect */
-    #readStatus {
-      transition: background-color 0.3s ease;
-    }
-
-
   }
+}
+
+/* Read Toggle Button */
+.readStatus {
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.readStatus.active {
+  background-color: green;
+  color: white;
+}
+
+/* Adding transitions for a smoother visual effect */
+.readStatus {
+  transition: background-color 0.3s ease;
 }
 
 /* Footer */
