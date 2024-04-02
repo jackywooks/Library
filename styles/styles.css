@@ -71,7 +71,7 @@ main {
       color: black;
     }
 
-    button.close:hover{
+    button.close:hover {
       color: darkgrey;
     }
 
@@ -136,13 +136,15 @@ dialog {
       margin-bottom: 5px;
       border-radius: 5px;
     }
+  
 
-    #readStatus {
-      padding: 10px 20px;
-      background-color: #f0f0f0;
-      border: 1px solid #ccc;
-      cursor: pointer;
-    }
+/* Read Toggle Button */
+.readStatus {
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
 
     #readStatus > span::before{
       content: "Unread";

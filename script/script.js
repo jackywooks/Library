@@ -2,13 +2,19 @@ const addButton = document.querySelector("#addBook");
 const dialog = document.querySelector("dialog");
 const confirmButton = dialog.querySelector("#submit");
 const inputArray = dialog.querySelectorAll("input");
-const toggleButton = document.getElementById("readStatus");
-const readStatus = toggleButton.querySelector("span");
+const toggleButtons = document.querySelectorAll(".readStatus");
+const readStatus = document.getElementById("readStatus");
+let isToggled = false;
 
 //Event Listeners
 //toggle Button in the dialog
-toggleButton.addEventListener("click", function () {
-  this.classList.toggle("active");
+toggleButtons.forEach((toggleButton) => {
+  toggleButton.addEventListener("click", function () {
+    isToggled = !isToggled;
+    this.innerText = isToggled ? "Read" : "Unread";
+    this.classList.toggle("active");
+    this.setAttribute("aria-pressed", isToggled);
+  });
 });
 
 // "Show the dialog" button opens the dialog modally
@@ -26,12 +32,14 @@ confirmButton.addEventListener("click", (event) => {
     inputArray[1].value, //Author
     inputArray[2].value, //Pages
     inputArray[3].value, //Description
-    getComputedStyle(readStatus, '::before').getPropertyValue('content'), //Read Status
+    isToggled, //Read Status
     addBookToLibrary(
+      //create the book and return the index of the book in the same go
       inputArray[0].value,
       inputArray[1].value,
       inputArray[2].value,
-      inputArray[3].value
+      inputArray[3].value,
+      isToggled
     )
   );
 
@@ -40,6 +48,9 @@ confirmButton.addEventListener("click", (event) => {
   inputArray[1].value = "";
   inputArray[2].value = "";
   inputArray[3].value = "";
+  isToggled = false;
+  readStatus.classList.remove("active");
+  readStatus.innerText = "Unread";
   dialog.close();
 });
 
@@ -60,19 +71,25 @@ function addBookToLibrary(title, author, pages, remark, read) {
   return myLibrary.push(newBook) - 1;
 }
 
-// function displayBooks() {
-//   let i = 0;
-//   for (const book of myLibrary) {
-//     createCard(book.title, book.author, book.pages, book.remark, i);
-//     i++;
-//   }
-// }
-
 function removeBookFromLibrary(index) {
   myLibrary.splice(index);
 }
 
-function createCard(title, author, pages, remark, read, index) {
+function toggleReadStatus(index) {
+  let i = 0;
+  let readValue;
+  myLibrary.forEach((book) => {
+    if (i == index) {
+      book.read = !book.read;
+      readValue = book.read;
+      return;
+    }
+    i++;
+  });
+  return readValue;
+}
+
+function createCard(title, author, pages, remark, isRead, index) {
   //create Book Card
   const main = document.querySelector("main");
   const card = document.createElement("div");
@@ -87,7 +104,7 @@ function createCard(title, author, pages, remark, read, index) {
   card.appendChild(closeBtn);
   closeBtn.addEventListener("click", () => {
     card.parentNode.removeChild(card);
-    removeBookFromLibrary(index);
+    removeBookFromLibrary(closeBtn.getAttribute("data-index"));
   });
 
   //Content
@@ -95,9 +112,10 @@ function createCard(title, author, pages, remark, read, index) {
   displayInfo("Author", author, card);
   displayInfo("Pages", pages, card);
   displayInfo("Remark", remark, card);
+  displayButton(isRead, card, index);
 }
 
-function displayInfo(Name, value, division) {
+function displayInfo(Name, value, parentNode) {
   const containerDiv = document.createElement("div");
   const label = document.createElement("p");
   label.textContent = `${Name}:`;
@@ -106,5 +124,24 @@ function displayInfo(Name, value, division) {
   dispValue.readOnly = true;
   containerDiv.appendChild(label);
   containerDiv.appendChild(dispValue);
-  division.appendChild(containerDiv);
+  parentNode.appendChild(containerDiv);
+}
+
+function displayButton(isRead, parentNode, index) {
+  const containerDiv = document.createElement("div");
+  const readButton = document.createElement("button");
+  readButton.innerText = isRead ? "Read" : "Unread";
+  readButton.setAttribute("class", "readStatus");
+  readButton.setAttribute("data-index", index);
+  if (isRead) {
+    readButton.classList.add("active");
+  }
+  readButton.addEventListener("click", function () {
+    isRead = toggleReadStatus(readButton.getAttribute("data-index"));
+    this.innerText = isRead ? "Read" : "Unread";
+    this.classList.toggle("active");
+    this.setAttribute("aria-pressed", isRead);
+  });
+  containerDiv.appendChild(readButton);
+  parentNode.appendChild(containerDiv);
 }
